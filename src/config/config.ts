@@ -1,5 +1,5 @@
 import * as dotenv from "dotenv";
-import {  DataSourceOptions } from "typeorm";
+import {  DataSource, DataSourceOptions } from "typeorm";
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 
 
@@ -84,8 +84,29 @@ export abstract class ConfigServer {
             synchronize: true,
             logging: false,
             namingStrategy: new SnakeNamingStrategy()
-        }
-
+        } 
     }
+
+    /**
+     * Apertura de conexion a base de datos usando el DataSource
+     *
+     * @return {*}  {Promise<DataSource>}
+     * @memberof ServerBoostrap
+     */
+     async dbConnection(): Promise<DataSource> {
+        
+        // return await new DataSource(this.typeORMConfig).initialize();
+
+        try {
+            
+            console.log(`🚀  Database Connected`); 
+            return await new DataSource(this.typeORMConfig).initialize();
+        } catch (error) {
+            console.log(`🚀 Database Connection Error: ${error}` );
+            return await new DataSource(this.typeORMConfig).initialize();
+        }
+    }
+
+
 
 }

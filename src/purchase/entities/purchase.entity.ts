@@ -1,26 +1,18 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntity } from "../../config/base.entity";
-import { PurchaseProductEntity } from "../../custom/entities/purchases-products.entity";
+import { PurchaseProductEntity } from "./purchases-products.entity";
 import { CustomerEntity } from "../../customers/entities/customer.entity";
+import { enumStatus, enumPaymenMethod } from '../../shared/utils/enum';
 
 
-enum status {
-                ACTIVE = "ACTIVE",
-                INACTIVE = "INACTIVE",
-            }
-
-enum paymenMethod {
-            CASH = "CASH",
-            CD = "CD",
-}
 @Entity({name: "purchase"})
 export class PurchaseEntity extends BaseEntity {
 
     @Column()
-    status!: status;
+    status!: enumStatus;
     
     @Column()
-    paymentmethod!: paymenMethod;
+    paymentMethod!: enumPaymenMethod;
     
     @ManyToOne(() => CustomerEntity, (customer) => customer.purchases)
     @JoinColumn({name: "customer_id"})

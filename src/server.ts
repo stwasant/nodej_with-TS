@@ -3,7 +3,6 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { UserRouter } from './user/user.router';
 import { ConfigServer } from './config/config';
-import { DataSource, DataSourceOptions } from 'typeorm';
 
 /**
  * Clase que levanta el servidor
@@ -37,22 +36,6 @@ class ServerBoostrap extends ConfigServer {
         return [new UserRouter().router]
     }
     
-    /**
-     * Apertura de conexion a base de datos usando el DataSource
-     *
-     * @return {*}  {Promise<DataSource>}
-     * @memberof ServerBoostrap
-     */
-    async dbConnection(): Promise<void> {
-        
-        try {
-            await new DataSource(this.typeORMConfig).initialize();
-            console.log(`🚀  Database Connected`); 
-        } catch (error) {
-            console.log(`🚀 Database Connection Error: ${error}` );
-        }
-    }
-
     /**
      * Functions for initializing the server with express.
      *
