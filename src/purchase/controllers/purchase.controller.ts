@@ -11,7 +11,6 @@ export class PurchaseController {
             const data = await this.purchaseService.findAllPurchase();
             resp.status(200).json(data);
             console.log(`✅ Successfull ${data}`);
-
         } catch (error) {
             console.error( `❌  Error getPurchase: ${error}`);
         }

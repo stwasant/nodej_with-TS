@@ -15,7 +15,4 @@ export class PurchaseDTO extends BaseDTO {
     @IsNotEmpty()
     customer!: CustomerEntity;
 
-    @IsNotEmpty()
-    purchaseProduct!: PurchaseProductEntity;
-
 }

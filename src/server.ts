@@ -2,6 +2,12 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { UserRouter } from './user/user.router';
+import { CategoryRouter } from './categories/category.router';
+import { CustomerRouter } from './customers/customer.router';
+import { ProductRouter } from './products/product.router';
+import { PurchaseRouter } from './purchase/purchase.router';
+import { PurchaseProductRouter } from './purchase/purchase-product.router';
+
 import { ConfigServer } from './config/config';
 
 /**
@@ -33,7 +39,14 @@ class ServerBoostrap extends ConfigServer {
     } 
 
     routers(): Array<express.Router>{
-        return [new UserRouter().router]
+        return [
+                new UserRouter().router,
+                new CategoryRouter().router,
+                new CustomerRouter().router,
+                new ProductRouter().router,
+                new PurchaseRouter().router,
+                new PurchaseProductRouter().router,
+                ]
     }
     
     /**
